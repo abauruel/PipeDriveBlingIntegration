@@ -8,6 +8,7 @@ describe('ListOpportunitiesService', () => {
       fakeRepository,
     );
     await fakeRepository.create({
+      _id: '1',
       data: '22/07/2020',
       orderNumbers: [],
       total: 0,
