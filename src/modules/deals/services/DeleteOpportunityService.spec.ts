@@ -8,11 +8,13 @@ describe('DeleteOpportunityService', () => {
       fakeRepository,
     );
     const opportunity1 = await fakeRepository.create({
+      _id: '1',
       data: '22/07/2020',
       orderNumbers: [],
       total: 0,
     });
     await fakeRepository.create({
+      _id: '2',
       data: '23/07/2020',
       orderNumbers: [],
       total: 0,
@@ -29,6 +31,7 @@ describe('DeleteOpportunityService', () => {
       fakeRepository,
     );
     await fakeRepository.create({
+      _id: '1',
       data: '22/07/2020',
       orderNumbers: [],
       total: 0,
