@@ -5,12 +5,12 @@ import IOpportunity from '../../dtos/IOpportunity';
 class FakeOpportunityRepository implements IOpportunityRepository {
   private fakeRepository: IOpportunity[] = [];
 
-  public async create(data: IOpportunity): Promise<IOpportunity> {
+  public async create(data: Omit<IOpportunity, '_id'>): Promise<IOpportunity> {
     const opportunity = {
       ...data,
       _id: uuid(),
     };
-    this.fakeRepository.push();
+    this.fakeRepository.push(opportunity);
     return opportunity;
   }
 
@@ -19,10 +19,10 @@ class FakeOpportunityRepository implements IOpportunityRepository {
   }
 
   public async findById(id: string): Promise<IOpportunity | undefined> {
-    const opportunity = this.fakeRepository.find(
-      opportnity => opportnity._id === id,
+    const opportunityFound = this.fakeRepository.find(
+      opportunity => opportunity._id === id,
     );
-    return opportunity;
+    return opportunityFound;
   }
 
   public async update(opportunity: IOpportunity): Promise<IOpportunity> {
