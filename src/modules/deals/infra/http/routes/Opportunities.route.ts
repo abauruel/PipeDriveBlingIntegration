@@ -4,5 +4,7 @@ import OpportunityController from '../controllers/OpportunityController';
 const OpportunityRouter = Router();
 const opportunityController = new OpportunityController();
 
-OpportunityRouter.get('/', opportunityController.store);
+OpportunityRouter.post('/', opportunityController.store);
+OpportunityRouter.get('/', opportunityController.index);
+
 export default OpportunityRouter;
