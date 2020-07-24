@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express, { NextFunction, Response, Request } from 'express';
 import '../typeorm';
 import '../../container';
-import cron from 'node-cron';
+
 import routes from './routes';
 
 import AppError from '../../errors/AppError';
@@ -10,9 +10,6 @@ import AppError from '../../errors/AppError';
 const app = express();
 
 app.use(express.json());
-cron.schedule(`${process.env.JOB_MINUTE} ${process.env.JOB_HOUR} * * *`, () =>
-  console.log('Job executado'),
-);
 
 app.use(routes);
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
