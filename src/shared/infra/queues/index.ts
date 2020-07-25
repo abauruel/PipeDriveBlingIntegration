@@ -8,8 +8,12 @@ const queue = new Queue();
 
 queue.add({
   name: 'GetPipeDriveToBlingOpportunitiesAction',
-  hour: '*',
-  minute: '*',
+  hour: process.env.JOB1_HOUR || '12',
+  minute: process.env.JOB1_MINUTE || '*',
 });
-queue.add({ name: 'ImportOrderFromBlingByDate', hour: '22', minute: '19' });
+queue.add({
+  name: 'ImportOrderFromBlingByDate',
+  hour: process.env.JOB2_HOUR || '22',
+  minute: process.env.JOB2_MINUTE || '30',
+});
 queue.process();

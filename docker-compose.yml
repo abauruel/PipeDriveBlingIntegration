@@ -1,0 +1,17 @@
+version: '3'
+services:
+  backend:
+    image: bitnami/node:12.18.3-prod
+    ports:
+      - 3333:3333
+    container_name: backendNodeJs
+    volumes:
+      - ./:/backend
+    command: bash -c "cd /backend && npm install -g yarn && yarn dev:server"
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+    container_name: redisBull
+    ports:
+      - 6379:6379
