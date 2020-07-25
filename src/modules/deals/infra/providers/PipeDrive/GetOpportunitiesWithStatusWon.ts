@@ -1,13 +1,13 @@
 import axios from 'axios';
-import IOpportunityDTO from '../../../dtos/IOpportunityDTO';
+import IOpportunityResponseDTO from '../../../dtos/IOpportunityResponseDTO';
 
 interface IResponseOpportunities {
   success: boolean;
-  data: IOpportunityDTO[];
+  data: IOpportunityResponseDTO[];
 }
 
 class GetOpportunitiesWithStatusWon {
-  public async execute(): Promise<IOpportunityDTO[]> {
+  public async execute(): Promise<IOpportunityResponseDTO[]> {
     try {
       const opportunitiesWon = await axios.get<IResponseOpportunities>(
         `${process.env.PIPE_HOST}/deals?status=won&api_token=${process.env.PIPEDRIVE_TOKEN}`,
