@@ -1,6 +1,7 @@
+import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
 import IOpportunityRepository from '../repositories/IOpportunityRepository';
-import IOpportunity from '../dtos/IOpportunity';
+import IOpportunity from '../dtos/IOpportunitiesDayDTO';
 
 @injectable()
 class ListOpportunitiesService {
