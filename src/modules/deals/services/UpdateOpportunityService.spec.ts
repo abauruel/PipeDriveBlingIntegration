@@ -33,4 +33,32 @@ describe('UpdateOpportunityService', () => {
     );
     expect(opportunityUpdated.total).toBe(10);
   });
+  it('should not be able to update opportunity using id nonexistent', async () => {
+    const fakeRepository = new FakeRepository();
+    const updateOpportunityService = new UpdateOpportunityService(
+      fakeRepository,
+    );
+
+    const opportunity = await fakeRepository.create({
+      _id: uuid(),
+      data: '22/07/2020',
+      orderNumbers: [],
+      total: 0,
+    });
+
+    const newOpportunity = [
+      {
+        _id: '1',
+        data: '22/07/2020',
+        numero: '1',
+        situacao: 'Em aberto',
+        totalvenda: '10',
+        cliente: 'teste1',
+      },
+    ];
+
+    await expect(
+      updateOpportunityService.execute('nonexistent', newOpportunity),
+    ).rejects.toBeInstanceOf(Error);
+  });
 });
