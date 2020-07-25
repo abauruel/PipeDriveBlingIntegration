@@ -12,10 +12,8 @@
 </p>
 
 <p align="center">
-  <a href="#rocket-technologias">Tecnologias utilizadas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-
-<a href="#-how-can-i-run-it">Como executar?</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rocket-technologias">Tecnologias utilizadas</a>&nbsp;&nbsp;&nbsp;| <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|
+<a href="#-how-can-i-run-it">Como executar?</a>&nbsp;&nbsp;&nbsp;|
 <a href="#memo-license">License</a>
 
 </p>
