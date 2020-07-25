@@ -1,11 +1,14 @@
 import { uuid } from 'uuidv4';
 import IOpportunityRepository from '../IOpportunityRepository';
-import IOpportunity from '../../dtos/IOpportunity';
+
+import IOpportunitiesDayDTO from '../../dtos/IOpportunitiesDayDTO';
 
 class FakeOpportunityRepository implements IOpportunityRepository {
-  private fakeRepository: IOpportunity[] = [];
+  private fakeRepository: IOpportunitiesDayDTO[] = [];
 
-  public async create(data: Omit<IOpportunity, '_id'>): Promise<IOpportunity> {
+  public async create(
+    data: IOpportunitiesDayDTO,
+  ): Promise<IOpportunitiesDayDTO> {
     const opportunity = {
       ...data,
       _id: uuid(),
@@ -14,18 +17,29 @@ class FakeOpportunityRepository implements IOpportunityRepository {
     return opportunity;
   }
 
-  public async findAll(): Promise<IOpportunity[]> {
+  public async findAll(): Promise<IOpportunitiesDayDTO[]> {
     return this.fakeRepository;
   }
 
-  public async findById(id: string): Promise<IOpportunity | undefined> {
+  public async findById(id: string): Promise<IOpportunitiesDayDTO | undefined> {
     const opportunityFound = this.fakeRepository.find(
       opportunity => opportunity._id === id,
     );
     return opportunityFound;
   }
 
-  public async update(opportunity: IOpportunity): Promise<IOpportunity> {
+  public async findByDate(
+    date: string,
+  ): Promise<IOpportunitiesDayDTO | undefined> {
+    const opportunityFound = this.fakeRepository.find(
+      opportunity => opportunity.data === date,
+    );
+    return opportunityFound;
+  }
+
+  public async update(
+    opportunity: IOpportunitiesDayDTO,
+  ): Promise<IOpportunitiesDayDTO> {
     const opportunityIndex = this.fakeRepository.findIndex(
       opportnity => opportnity._id === opportunity._id,
     );
@@ -33,7 +47,7 @@ class FakeOpportunityRepository implements IOpportunityRepository {
     return this.fakeRepository[opportunityIndex];
   }
 
-  public async delete(opportunity: IOpportunity): Promise<void> {
+  public async delete(opportunity: IOpportunitiesDayDTO): Promise<void> {
     const opportunityIndex = this.fakeRepository.findIndex(
       opportnity => opportnity._id === opportunity._id,
     );
