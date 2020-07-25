@@ -1,7 +1,9 @@
+import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
+
 import IOpportunityRepository from '../repositories/IOpportunityRepository';
+import IOpportunityDayDTO from '../dtos/IOpportunitiesDayDTO';
 import IOpportunity from '../dtos/IOpportunity';
-import ListOpportunitiesBlingByDateService from './ListOpportunitiesBlingByDateService';
 
 @injectable()
 class UpdateOpportunityService {
@@ -10,29 +12,28 @@ class UpdateOpportunityService {
     private opportunityRepository: IOpportunityRepository,
   ) {}
 
-  public async execute(id: string): Promise<IOpportunity> {
-    const listOpportunitiesByDateService = new ListOpportunitiesBlingByDateService();
-
+  public async execute(
+    id: string,
+    opportunitiesIntegration: IOpportunity[],
+  ): Promise<IOpportunityDayDTO> {
     try {
       const opportunity = await this.opportunityRepository.findById(id);
 
       if (!opportunity) {
         throw new Error('Invalid Opportunity');
       }
-      const opportunityUpdate = await listOpportunitiesByDateService.execute(
-        String(opportunity.data),
-      );
 
-      const valueTotal = opportunityUpdate.reduce(
+      const valueTotal = opportunitiesIntegration.reduce(
         (acc, curr) => (acc += Number(curr.totalvenda)),
         0,
       );
-      opportunity.orderNumbers = opportunityUpdate.map(op => op);
+      opportunity.orderNumbers = opportunitiesIntegration.map(op => op);
       opportunity.total = valueTotal;
       await this.opportunityRepository.update(opportunity);
       return opportunity;
     } catch (err) {
       console.error(err.message);
+      throw new Error(err.message);
     }
   }
 }
