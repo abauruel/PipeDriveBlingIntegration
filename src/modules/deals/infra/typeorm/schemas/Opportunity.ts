@@ -1,31 +1,37 @@
-import {
-  Entity,
-  ObjectID,
-  ObjectIdColumn,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import Order from './Order';
+import { Column, Entity, ObjectIdColumn } from 'typeorm';
 
-@Entity('opportunities')
+@Entity()
 class Opportunity {
   @ObjectIdColumn()
-  _id: ObjectID;
-
-  @Column(type => Order)
-  orderNumbers: Order[];
-
-  @Column({ unique: true })
-  data: Date;
+  _id: string;
 
   @Column()
-  total: number;
+  numero: string;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @Column()
+  situacao: string;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @Column()
+  totalvenda: string;
+
+  @Column()
+  cliente: string;
+
+  @Column()
+  data: string;
+
+  constructor(
+    numero: string,
+    situacao: string,
+    totalvenda: string,
+    cliente: string,
+    data: string,
+  ) {
+    this.numero = numero;
+    this.situacao = situacao;
+    this.totalvenda = totalvenda;
+    this.cliente = cliente;
+    this.data = data;
+  }
 }
 export default Opportunity;

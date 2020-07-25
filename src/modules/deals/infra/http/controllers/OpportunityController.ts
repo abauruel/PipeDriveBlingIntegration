@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import ListOpportunitiesBlingByDateService from '../../../services/ListOpportunitiesBlingByDateService';
+import { format, parseISO } from 'date-fns';
+
 import SaveOpportunitiesInDbService from '../../../services/SaveOpportunitiesInDbService';
 import ListOpportunitiesService from '../../../services/ListOpportunitiesService';
 import UpdateOpportunityService from '../../../services/UpdateOpportunityService';
 import DeleteOpportunityService from '../../../services/DeleteOpportunityService';
-import AppError from '../../../../../shared/errors/AppError';
+import GetDateByIdService from '../../../services/GetDateByIdService';
+import ListOpportunitiesBlingByDate from '../../providers/Bling/ListOpportunitiesBlingByDate';
 
 class OpportunityController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -19,14 +21,12 @@ class OpportunityController {
   public async store(request: Request, response: Response): Promise<Response> {
     const { date } = request.body;
 
-    const listOpportunitiesByDateService = new ListOpportunitiesBlingByDateService();
+    const listOpportunitiesByDate = new ListOpportunitiesBlingByDate();
     const saveOpportunitiesInDbService = container.resolve(
       SaveOpportunitiesInDbService,
     );
     try {
-      const opportunitiesDay = await listOpportunitiesByDateService.execute(
-        date,
-      );
+      const opportunitiesDay = await listOpportunitiesByDate.execute(date);
 
       const opportunitySaved = await saveOpportunitiesInDbService.execute(
         opportunitiesDay,
@@ -41,11 +41,31 @@ class OpportunityController {
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
+    const listOpportunitiesByDate = new ListOpportunitiesBlingByDate();
+    const getDateByIdService = container.resolve(GetDateByIdService);
     const updateOpportunityService = container.resolve(
       UpdateOpportunityService,
     );
-    const opportunity = await updateOpportunityService.execute(id);
-    return response.json(opportunity);
+    try {
+      // retorna data a partir do ID
+      const dateById = await getDateByIdService.execute(id);
+
+      // formata data para dd/mm/yyyy
+      const dateByIdFormatted = format(parseISO(dateById), "dd'/'MM'/'yyyy");
+
+      // busca opportunidades no provider a partir da Data informada
+      const opportunitiesDay = await listOpportunitiesByDate.execute(
+        dateByIdFormatted,
+      );
+
+      const opportunity = await updateOpportunityService.execute(
+        id,
+        opportunitiesDay,
+      );
+      return response.json(opportunity);
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

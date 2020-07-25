@@ -9,13 +9,13 @@ class GetDateByIdService {
     private opportunityRepository: IOpportunityRepository,
   ) {}
 
-  public async execute(id: string): Promise<string> {
+  public async execute(id: string): Promise<string | undefined> {
     try {
       const opportunity = await this.opportunityRepository.findById(id);
+
       if (!opportunity) {
         throw new Error('Opportunity not found');
       }
-
       return opportunity.data;
     } catch (err) {
       throw new Error(err.message);

@@ -11,7 +11,6 @@ class FakeOpportunityRepository implements IOpportunityRepository {
   ): Promise<IOpportunitiesDayDTO> {
     const opportunity = {
       ...data,
-      _id: uuid(),
     };
     this.fakeRepository.push(opportunity);
     return opportunity;

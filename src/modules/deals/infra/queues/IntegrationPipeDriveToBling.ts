@@ -2,6 +2,11 @@ import Queue from 'bull';
 import redis from '../../../../shared/config/cache';
 import * as jobs from '../jobs';
 
+interface IAddQueue {
+  name: string;
+  hour: string;
+  minute: string;
+}
 const queues = Object.values(jobs).map(job => ({
   bull: new Queue(job.key, {
     redis,
@@ -11,13 +16,13 @@ const queues = Object.values(jobs).map(job => ({
 }));
 
 class IntegrationQueue {
-  public add(name) {
+  public add({ name, hour = '1', minute = '*' }: IAddQueue) {
     const newQueue = queues.find(queue => queue.name === name);
     return newQueue.bull.add(
       {},
       {
         repeat: {
-          cron: `${process.env.JOB_MINUTE} ${process.env.JOB_HOUR} * * *`,
+          cron: `${minute} ${hour} * * *`,
         },
       },
     );
@@ -25,10 +30,9 @@ class IntegrationQueue {
 
   public process(): void {
     return queues.forEach(queue => {
-      queue.bull.process(queue.handle);
+      queue.bull.process(5, queue.handle);
       queue.bull.on('failed', (job, err) => {
-        console.log('Job failed', job.name, job.data);
-        console.log(err.message);
+        console.log('Job failed', job.name, job.data, err.message);
       });
     });
   }

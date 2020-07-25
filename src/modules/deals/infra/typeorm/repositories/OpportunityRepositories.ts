@@ -1,33 +1,40 @@
 import { MongoRepository, getMongoRepository } from 'typeorm';
-import { ObjedctID } from 'mongodb';
+
 import IOpportunityRepository from '../../../repositories/IOpportunityRepository';
-import Opportunity from '../schemas/Opportunity';
-import IOpportunity from '../../../dtos/IOpportunity';
+
+import IOpportunitiesDayDTO from '../../../dtos/IOpportunitiesDayDTO';
+import OpportunitiesDay from '../schemas/OpportunitiesDay';
 
 class OpportunityRepositories implements IOpportunityRepository {
-  private ormRepository: MongoRepository<Opportunity>;
+  private ormRepository: MongoRepository<OpportunitiesDay>;
 
   constructor() {
-    this.ormRepository = getMongoRepository(Opportunity, 'mongo');
+    this.ormRepository = getMongoRepository(OpportunitiesDay, 'mongo');
   }
 
-  public async findAll(): Promise<Opportunity[]> {
+  public async findAll(): Promise<OpportunitiesDay[]> {
     const opportunities = await this.ormRepository.find();
     return opportunities;
   }
 
-  public async findById(id: string): Promise<Opportunity | undefined> {
+  public async findById(id: string): Promise<OpportunitiesDay | undefined> {
+    const opportunities = await this.ormRepository.findOne(id);
+
+    return opportunities;
+  }
+
+  public async findByDate(date: string): Promise<OpportunitiesDay | undefined> {
     const opportunities = await this.ormRepository.findOne({
       where: {
-        _id: id,
+        data: date,
       },
     });
 
     return opportunities;
   }
 
-  public async create(data: IOpportunity): Promise<IOpportunity> {
-    const opportunityDay = new Opportunity();
+  public async create(data: IOpportunitiesDayDTO): Promise<OpportunitiesDay> {
+    const opportunityDay = new OpportunitiesDay();
     opportunityDay.data = data.data;
     opportunityDay.orderNumbers = data.orderNumbers;
     opportunityDay.total = data.total;
@@ -36,15 +43,19 @@ class OpportunityRepositories implements IOpportunityRepository {
       return opportunityDay;
     } catch (err) {
       console.error(`Falha ao salvar dados: ${err}`);
+      throw new Error(err.message);
     }
   }
 
-  public async update(opportunity: Opportunity): Promise<Opportunity> {
-    this.ormRepository.update(opportunity._id, opportunity);
+  public async update(
+    opportunity: IOpportunitiesDayDTO,
+  ): Promise<OpportunitiesDay | undefined> {
+    await this.ormRepository.update(opportunity._id, opportunity);
+
     return this.ormRepository.findOne(opportunity._id);
   }
 
-  public async delete(opportunity: IOpportunity): Promise<void> {
+  public async delete(opportunity: IOpportunitiesDayDTO): Promise<void> {
     await this.ormRepository.delete(opportunity);
   }
 }
