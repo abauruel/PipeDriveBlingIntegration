@@ -1,9 +1,12 @@
-import IOpportunity from '../dtos/IOpportunity';
+import IOpportunitiesDayDTO from '../dtos/IOpportunitiesDayDTO';
 
 export default interface IOpportunityRepository {
-  create(data: IOpportunity): Promise<IOpportunity>;
-  findAll(): Promise<IOpportunity[]>;
-  findById(id: string): Promise<IOpportunity | undefined>;
-  update(opportunity: IOpportunity): Promise<IOpportunity>;
-  delete(opportunity: IOpportunity): Promise<void>;
+  create(data: IOpportunitiesDayDTO): Promise<IOpportunitiesDayDTO>;
+  findAll(): Promise<IOpportunitiesDayDTO[]>;
+  findById(id: string): Promise<IOpportunitiesDayDTO | undefined>;
+  update(
+    opportunity: IOpportunitiesDayDTO,
+  ): Promise<IOpportunitiesDayDTO | undefined>;
+  delete(opportunity: IOpportunitiesDayDTO): Promise<void | undefined>;
+  findByDate(date: string): Promise<IOpportunitiesDayDTO | undefined>;
 }
