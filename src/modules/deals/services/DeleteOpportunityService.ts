@@ -9,16 +9,14 @@ class DeleteOpportunityService {
     private opportunityRepository: IOpportunityRepository,
   ) {}
 
-  public async execute(id: string): Promise<void> {
+  public async execute(id: string): Promise<void | undefined> {
     try {
       const opportunity = await this.opportunityRepository.findById(id);
       if (!opportunity) {
         throw new Error('Opportunity not found');
       }
-
       await this.opportunityRepository.delete(opportunity);
     } catch (err) {
-      console.error(err.message);
       throw new Error(err.message);
     }
   }
