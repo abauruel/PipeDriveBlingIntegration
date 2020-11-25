@@ -682,13 +682,6 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/bent@^7.3.0":
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/@types/bent/-/bent-7.3.0.tgz#c3a99e790eceba77e0b87423eef35f0b034678a5"
-  integrity sha512-EitzswEqzdUc1Yqnyuqd90aLQCgHeTCwd7GMoL56saxpNt5Mi6v8Sr4BrlKd0NYRwdwcayQqb2QuKjGYM7GegQ==
-  dependencies:
-    "@types/node" "*"
-
 "@types/body-parser@*":
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.19.0.tgz#0685b3c47eb3006ffed117cdd55164b61f80538f"
@@ -1337,15 +1330,6 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-bent@^7.3.7:
-  version "7.3.7"
-  resolved "https://registry.yarnpkg.com/bent/-/bent-7.3.7.tgz#6dc42fea1b58c6ebe04146c39aba666f9c13cb0c"
-  integrity sha512-APYx9bkrq3olflUbDeymwmQLQLR39d0Qz/xbvWG3pgKtklrxHvFUHQgEEK4Tp5e0pnvQQCQM7Vdb3SzErmTtZQ==
-  dependencies:
-    bytesish "^0.4.1"
-    caseless "~0.12.0"
-    is-stream "^2.0.0"
-
 binary-extensions@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.1.0.tgz#30fa40c9e7fe07dbc895678cd287024dea241dd9"
@@ -1463,11 +1447,6 @@ bytes@3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
   integrity sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
-
-bytesish@^0.4.1:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/bytesish/-/bytesish-0.4.2.tgz#99c2e7c392dcd57b48e01650753aca2bc3ac9fb7"
-  integrity sha512-ym4cXhq28K7uhYZUEOl17LuqsqKSphDsZcfAKmEa/HcCsCqHMQXOiFuWx1OnbktJux/qKK1W9Xt9uU5kLIKypQ==
 
 cache-base@^1.0.1:
   version "1.0.1"
@@ -1737,7 +1716,7 @@ color-name@~1.1.4:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
-combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
+combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
   integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
@@ -2809,15 +2788,6 @@ form-data@^2.5.0:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-form-data@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/form-data/-/form-data-3.0.0.tgz#31b7e39c85f1355b7139ee0c647cf0de7f83c682"
-  integrity sha512-CKMFDglpbMi6PyN+brwB9Q/GOw0eAnsrEZDgcsH5Krhz5Od/haKHAX0NmQfha2zPPz0JpWzA7GJHGSnvCRLWsg==
-  dependencies:
-    asynckit "^0.4.0"
-    combined-stream "^1.0.8"
-    mime-types "^2.1.12"
-
 form-data@~2.3.2:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.3.tgz#dcce52c05f644f298c6a7ab936bd724ceffbf3a6"
@@ -3119,9 +3089,9 @@ has@^1.0.3:
     function-bind "^1.1.1"
 
 highlight.js@^9.6.0:
-  version "9.18.1"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.1.tgz#ed21aa001fe6252bb10a3d76d47573c6539fe13c"
-  integrity sha512-OrVKYz70LHsnCgmbXctv/bfuvntIKDz177h0Co37DQ5jamGZLVmoCVMtjMtNZY3X9DrCcKfklHPNeA0uPZhSJg==
+  version "9.18.5"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.5.tgz#d18a359867f378c138d6819edfc2a8acd5f29825"
+  integrity sha512-a5bFyofd/BHCX52/8i8uJkjr9DYwXIPnM/plwI6W7ezItLGqzt7X2G2nXuYSfsIJdkwwj/g9DG1LkcGJI/dDoA==
 
 homedir-polyfill@^1.0.1:
   version "1.0.3"
